@@ -16,4 +16,4 @@ As entregas vão definir o fim do nosso ciclo de desenvolvimento, portanto cada 
 
 ## Entrega 1
 
-[Proposta do projeto (escopo e casos de uso)](PROPOSTA.md)
+[Proposta do projeto (escopo e casos de uso)](https://docs.google.com/document/d/1uTegi62ha-cKHHRUEJ_0wX5pyV_VohFNR5k4Y9agPko/edit?usp=sharing)
