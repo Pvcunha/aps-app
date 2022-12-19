@@ -8,7 +8,7 @@
 
 # Proposta
 
-Inserir a nossa proposta de projeto aqui
+O projeto EvenCIN consiste numa aplicação web para integrar grupos à eventos cadastrados. Sendo assim, a plataforma tem o intuito de reunir eventos e pessoas interessadas, assim como expor aqueles que pretendem participar do evento para outros usuários. No ambiente em questão será possível cadastrar e excluir eventos, bem como adicionar e possuir uma lista de amigos.
 
 # Entregas
 
