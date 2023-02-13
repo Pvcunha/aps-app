@@ -8,7 +8,9 @@
 
 # Proposta
 
-O projeto EvenCIN consiste numa aplicação web para integrar grupos à eventos cadastrados. Sendo assim, a plataforma tem o intuito de reunir eventos e pessoas interessadas, assim como expor aqueles que pretendem participar do evento para outros usuários. No ambiente em questão será possível cadastrar e excluir eventos, bem como adicionar e possuir uma lista de amigos.
+O projeto CantinaCIn consiste numa aplicação web de uma loja de lanches. Portanto, a plataforma tem como objetivo expor lanches (comida e bebida) disponíveis para compra e assim facilitar o acesso a lanches no Centro de Informática. No ambiente da aplicação sera possível adicionar comidas e bebidas ao carrinho seu carrinho e finalizar a compra. Os agentes externos se responsabilizarão com o pagamento.
+
+
 
 # Entregas
 
