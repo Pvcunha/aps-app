@@ -1,0 +1,1 @@
+from repositorioClienteMemoria import *

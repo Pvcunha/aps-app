@@ -4,6 +4,7 @@ from negocio.entidades.item import Item
 class ControladorPedido:
 
     def __init__(self,registroProduto) -> None:
-        self.registroClientes = registroClientes
+        self.registroProduto = registroProduto
 
-    def checkProduct(self,email,senha) -> Item:
+    def pegaItemEstoque(self,nome) -> Item:
+        self.registroProduto.itemEstoque(nome)   
