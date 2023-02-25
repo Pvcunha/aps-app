@@ -1,7 +1,7 @@
-from IFabricaRepositorios import IFabricaAbstrataRepositorios
+from backend.negocio.iFabricaRepositorios import iFabricaAbstrataRepositorios
 from dados.cliente.repositorioClienteMemoria import RepositorioClienteMemoria
 
-class FabricaRepositorios(IFabricaAbstrataRepositorios):
+class FabricaRepositorios(iFabricaAbstrataRepositorios):
 
     def criaRepositorioClientesMemoria():
         return RepositorioClienteMemoria()

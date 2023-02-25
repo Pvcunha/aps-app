@@ -1,10 +1,10 @@
-from cliente import Cliente
+from negocio.entidades.cliente import Cliente
 
-class ControladorLogin:
+class ControladorCadastro:
 
     def __init__(self, registroClientes) -> None:
         self.registroClientes = registroClientes
     
-    def cadastroCliente(self, email, senha):
-        clienteNovo = Cliente(email, senha)
-        self.registroClientes.adiciona(clienteNovo)
+    def cadastroCliente(self, email, senha, cpf, id):
+        clienteNovo = Cliente(email, senha, cpf, id)
+        self.registroClientes.fazCadastro(clienteNovo)

@@ -1,0 +1,1 @@
+from backend.interface_negocio_dados.iRepositorioCliente import *
