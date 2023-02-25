@@ -1,0 +1,3 @@
+
+class Fachada:
+    pass

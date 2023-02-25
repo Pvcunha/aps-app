@@ -1,0 +1,17 @@
+certifi @ file:///croot/certifi_1671487769961/work/certifi
+click @ file:///tmp/build/80754af9/click_1646056706450/work
+dataclasses==0.6
+dnspython==2.3.0
+email-validator==1.3.1
+Flask @ file:///croot/flask_1671217343254/work
+Flask-Login==0.6.2
+Flask-SQLAlchemy==3.0.2
+Flask-WTF==1.1.1
+greenlet==2.0.1
+idna==3.4
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+Jinja2 @ file:///croot/jinja2_1666908132255/work
+MarkupSafe @ file:///opt/conda/conda-bld/markupsafe_1654597864307/work
+SQLAlchemy==1.4.46
+Werkzeug @ file:///croot/werkzeug_1671215996852/work
+WTForms==3.0.1

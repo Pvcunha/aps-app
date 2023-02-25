@@ -1,0 +1,1 @@
+from ..dados.cliente import repositorioClienteMemoria
