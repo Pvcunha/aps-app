@@ -1,7 +1,6 @@
-from negocio.entidades.item import Item
 from interface_negocio_dados.iRepositorioPedido import IRepositorioPedidos
 from negocio.entidades.pedido import Pedido
-from utils.exceptions import EstoqueInsuficienteException
+from typing import List
 
 class RegistroPedidos:
 
@@ -9,6 +8,8 @@ class RegistroPedidos:
         self.repositorioPedidosMemoria = repositorioPedidos
         pass
 
-    def registroPagamento(self, pedido: Pedido):
-        self.repositorioPedidosMemoria.inserirPedido(pedido)
+    def registraPedido(self, pedido: Pedido):
+        return self.repositorioPedidosMemoria.inserirPedido(pedido)
         
+    def buscaPedidosdoCliente(self, clienteid) -> List[Pedido]:
+        return self.repositorioPedidosMemoria.buscaPedidos(clienteid)

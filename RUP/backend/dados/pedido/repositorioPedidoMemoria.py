@@ -1,11 +1,12 @@
 from negocio.entidades.pedido import Pedido
 from backend.interface_negocio_dados.iRepositorioPedido import iRepositorioPedido
 from utils import SingletonMeta
+from typing import List
 
 class RepositorioPedidoMemoria(iRepositorioPedido, metaclass=SingletonMeta):
 
     def __init__(self):
-        self.Pedidos = []
+        self.pedidos: List[Pedido] = []
         self.id_count = 0
     
     def inserirPedido(self, pedido: Pedido) -> Pedido:
@@ -14,20 +15,6 @@ class RepositorioPedidoMemoria(iRepositorioPedido, metaclass=SingletonMeta):
         self.pedidos.append(pedido)
         return pedido
     
-    def buscarPedido(self, email: str) -> Pedido:
-        Pedido = next(iter([c for c in self.Pedidos if c.email == email]))
-        if Pedido == None:
-            raise Exception("Pedido nao encontrado")
-
-        return Pedido
-
-    def removerPedido(self, email: str) -> Pedido:
-        Pedido = self.buscarPedido(email)
-        self.Pedidos.pop(Pedido)
-        return Pedido
-        
-
-    def atualizarPedido(self, email: str, pedidoAlterado: Pedido) -> Pedido:
-        pedido = self.buscarPedido(email)
-        pedido = pedidoAlterado
-        return pedido
+    def buscarPedidos(self, clienteid) -> List[Pedido]:
+        return [pedido for pedido in self.pedidos if pedido.clienteId == clienteid]
+    

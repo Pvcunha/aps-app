@@ -8,13 +8,5 @@ class IRepositorioPedidos(metaclass=ABCMeta):
         pass
     
     @abstractmethod
-    def buscarPedido(self, email: str) -> Pedido:
-        pass
-
-    @abstractmethod
-    def removerPedido(self, email: str) -> Pedido:
-        pass
-        
-    @abstractmethod
-    def atualizarPedido(self, email: str, pedidoAlterado: Pedido) -> Pedido:
+    def buscarPedidos(self, clienteid: str) -> Pedido:
         pass
