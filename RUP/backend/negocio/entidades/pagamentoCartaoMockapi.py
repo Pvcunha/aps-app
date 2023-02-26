@@ -1,12 +1,14 @@
 import requests
 import json
 from typing import Dict
+from typing import Any
+from negocio.entidades.pedido import Pedido
 
 class PagamentoCartaoMockapi:
 
     apiurl = 'https://63fb5d347a045e192b67d6d9.mockapi.io/api/v1/pagamentoCartao'
 
-    def pagar(self, **args) -> Dict:
+    def pagar(self, **args) -> Dict[Pedido, Any]:
         mockapi_data = {'Pedido': args['pedido'].__dict__, 
                         'Dados Pagamento': {'Numero Cartao': args['numeroCartao'], 
                                             'CVV': args['cvv'],

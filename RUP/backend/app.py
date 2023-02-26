@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, jsonify
 from negocio import Fachada
 
 app = Flask(__name__)
+
 fachada = Fachada()
 
 @app.route('/')

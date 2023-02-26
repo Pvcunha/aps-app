@@ -5,11 +5,11 @@ from typing import List
 class RegistroPedidos:
 
     def __init__(self, repositorioPedidos: IRepositorioPedidos):
-        self.repositorioPedidosMemoria = repositorioPedidos
-        pass
+        self.repositorioPedidos = repositorioPedidos
+        
 
     def registraPedido(self, pedido: Pedido):
-        return self.repositorioPedidosMemoria.inserirPedido(pedido)
+        return self.repositorioPedidos.inserirPedido(pedido)
         
     def buscaPedidosdoCliente(self, clienteid) -> List[Pedido]:
-        return self.repositorioPedidosMemoria.buscaPedidos(clienteid)
+        return self.repositorioPedidos.buscarPedidos(clienteid)

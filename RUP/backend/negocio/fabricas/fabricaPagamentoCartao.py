@@ -6,10 +6,10 @@ from negocio.adapters.adapterPagamentoCartao import AdapterPagamentoCartaoMockap
 
 class FabricaPagamentoCartao(FabricaPagamento):
     
-    def criaPagamento(pedido: Pedido, dadosPagamento: Dict) -> Pagamento:
+    def criaPagamento(self, pedido: Pedido, dadosPagamento: Dict) -> Pagamento:
         if dadosPagamento['bandeira'] == 'mockapi':
-            adapterPagamentoCartao = AdapterPagamentoCartaoMockapi(pedido, numeroCartao=dadosPagamento['numero cartao'], 
-                                                               cpfTitular=dadosPagamento['cpf'], nomeTitular=dadosPagamento['nome'], 
+            adapterPagamentoCartao = AdapterPagamentoCartaoMockapi(pedido, numeroCartao=dadosPagamento['numeroCartao'], 
+                                                               cpfTitular=dadosPagamento['cpf'], nomeTitular=dadosPagamento['nomeTitular'], 
                                                                cvv=dadosPagamento['cvv'], vencimento=dadosPagamento['vencimento'])
         else:
             raise Exception("Bandeira Nao implementada")

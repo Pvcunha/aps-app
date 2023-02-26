@@ -1,5 +1,6 @@
 from dependency_injector  import containers, providers
 import enum
+import json
 
 class SingletonMeta(type):
     _instances = {}
@@ -30,3 +31,9 @@ class StatusPedido(enum.Enum):
             return self.ESPERANDO
         else:
             return self.CONCLUIDO
+        
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, StatusPedido):
+            return obj.value
+        return super().default(obj)

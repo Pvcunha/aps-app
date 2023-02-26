@@ -11,5 +11,5 @@ class PagamentoCartao(Pagamento):
         self.cpfTitular = cpfTitular
         self.vencimento = vencimento
 
-    def pagar():
+    def pagar(self) -> Pedido:
         pass

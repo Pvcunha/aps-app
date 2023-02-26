@@ -9,4 +9,4 @@ class Pedido:
     clienteId: int
     valor: float
     itens: List[Item]
-    status: StatusPedido
+    status: str

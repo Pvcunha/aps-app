@@ -1,6 +1,7 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 from negocio.entidades.cliente import Cliente
-class IRepositorioClientes():
+
+class IRepositorioClientes:
     
     @abstractmethod
     def inserirCliente(self, cliente: Cliente) -> Cliente:

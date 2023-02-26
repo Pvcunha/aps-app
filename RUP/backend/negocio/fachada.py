@@ -1,10 +1,10 @@
 from flask import jsonify, Response
-from utils.utils import SingletonMeta
-from utils.utils import Injector
+from utils.utils import SingletonMeta, Injector, CustomJSONEncoder
 from utils.exceptions import EstoqueInsuficienteException
 from negocio.controladores.controladorLogin import ControladorLogin
 from negocio.controladores.controladorCadastro import ControladorCadastro
 from negocio.controladores.controladorEstoque import ControladorEstoque
+from negocio.controladores.controladorPedido import ControladorPedido
 from negocio.fabricas.fabricaRepositoriosMemoria import FabricaRepositoriosMemoria
 
 class Fachada(metaclass=SingletonMeta):
@@ -19,8 +19,9 @@ class Fachada(metaclass=SingletonMeta):
         repositorioEstoque = self.__fabricaRepositorio.criaRepositorioEstoque()
         repositorioPedidos = self.__fabricaRepositorio.criaRepositorioPedido()
         
-        myContainer = Injector()
+        self.repo = repositorioPedidos
 
+        myContainer = Injector()
         myContainer.repositorioClientes = repositorioClientes
         myContainer.repositorioEstoque = repositorioEstoque
         myContainer.repositorioPedidos = repositorioPedidos
@@ -28,6 +29,7 @@ class Fachada(metaclass=SingletonMeta):
         self.__controladorLogin = ControladorLogin()
         self.__controladorCadastro = ControladorCadastro()
         self.__controladorEstoque = ControladorEstoque()
+        self.__controladorPedido = ControladorPedido()
 
     def fazLogin(self, email: str, senha: str) -> Response:
         try:
@@ -62,3 +64,8 @@ class Fachada(metaclass=SingletonMeta):
         itens = self.__controladorEstoque.pegaEstoque()
         itens_dicts = [item.__dict__ for item in itens]
         return jsonify(itens_dicts)
+
+    def fazerPedido(self, pedido, dadosPagamento):
+        pedidoFeito = self.__controladorPedido(pedido, dadosPagamento)
+        response = jsonify(pedidoFeito)
+        return response

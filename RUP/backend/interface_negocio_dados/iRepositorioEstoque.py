@@ -1,8 +1,8 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 from negocio.entidades.item import Item
 from typing import List
 
-class IRepositorioEstoque():
+class IRepositorioEstoque:
     
     @abstractmethod
     def inserirItem(self, item: Item) -> Item:

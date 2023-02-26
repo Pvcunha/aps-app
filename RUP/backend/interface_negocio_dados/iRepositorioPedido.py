@@ -1,12 +1,12 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 from negocio.entidades.pedido import Pedido
 
-class IRepositorioPedidos(metaclass=ABCMeta):
+class IRepositorioPedidos:
     
     @abstractmethod
     def inserirPedido(self, pedido: Pedido) -> Pedido:
         pass
     
     @abstractmethod
-    def buscarPedidos(self, clienteid: str) -> Pedido:
+    def buscarPedidos(self, clienteid: int) -> Pedido:
         pass
