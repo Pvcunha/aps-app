@@ -1,5 +1,6 @@
-from interface_negocio_dados.iFabricaRepositorios import IFabricaAbstrataRepositorios
 from dependency_injector  import containers, providers
+import enum
+
 class SingletonMeta(type):
     _instances = {}
 
@@ -9,12 +10,15 @@ class SingletonMeta(type):
             cls._instances[cls] = instance
         return cls._instances[cls]
 
-class MyContainer(containers.DeclarativeContainer):
+class Injector(metaclass=SingletonMeta):
 
-    repositorioClientes = providers.Object(None)
+    repositorioClientes = None
 
-    repositorioEstoque = providers.Object(None)
+    repositorioEstoque = None
     
-    repositorioPedidos = providers.Object(None)
+    repositorioPedidos = None
 
-myContainer = MyContainer()
+class StatusPedido(enum.Enum):
+    FALHA=0
+    ESPERANDO=1
+    CONCLUIDO=2
