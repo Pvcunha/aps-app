@@ -5,11 +5,10 @@ from dados.cliente.repositorioClienteMemoria import RepositorioClienteMemoria
 from dados.estoque.repositorioEstoqueMemoria import RepositorioItemMemoria
 from interface_negocio_dados.iRepositorioEstoque import IRepositorioEstoque
 from interface_negocio_dados.iRepositorioPedido import IRepositorioPedidos
-from dados.cliente.repositorioClienteMemoria import RepositorioClienteMemoria
 
 class FabricaRepositoriosMemoria(IFabricaAbstrataRepositorios):
 
-    def criaRepositorioClientes(self) -> RepositorioClienteMemoria:
+    def criaRepositorioClientes(self) -> IRepositorioClientes:
         return RepositorioClienteMemoria()
     
     def criaRepositorioEstoque(self) -> IRepositorioEstoque:
