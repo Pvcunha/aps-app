@@ -1,1 +1,1 @@
-from ..dados.cliente import repositorioClienteMemoria
+from negocio.fachada import Fachada

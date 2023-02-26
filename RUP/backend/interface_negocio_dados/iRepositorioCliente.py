@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from negocio.entidades.cliente import Cliente
-class IRepositorioCliente():
+class IRepositorioClientes():
     
     @abstractmethod
     def inserirCliente(self, cliente: Cliente) -> Cliente:
@@ -16,4 +16,8 @@ class IRepositorioCliente():
     
     @abstractmethod
     def atualizarCliente(self, email: str) -> Cliente :
+        pass
+
+    @abstractmethod
+    def getAll(self):
         pass
