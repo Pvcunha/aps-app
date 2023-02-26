@@ -20,5 +20,13 @@ class Injector(metaclass=SingletonMeta):
 
 class StatusPedido(enum.Enum):
     FALHA=0
-    ESPERANDO=1
-    CONCLUIDO=2
+    CONCLUIDO=1
+    ESPERANDO=2
+
+    def get(self, num):
+        if num == 0:
+            return self.FALHA
+        elif num == 1:
+            return self.ESPERANDO
+        else:
+            return self.CONCLUIDO
