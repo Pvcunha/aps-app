@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class Produto:
-    def __init__(self,nome,valor,id):
-        self.nome=nome
-        self.valor=valor
-        self.id=id
+    nome: str
+    valor: float
+    id: int

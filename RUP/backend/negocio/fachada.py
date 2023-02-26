@@ -1,11 +1,11 @@
 from flask import jsonify, Response
 from utils.utils import SingletonMeta
-from negocio.entidades.cliente import Cliente
+from utils.utils import Injector
+from utils.exceptions import EstoqueInsuficienteException
 from negocio.controladores.controladorLogin import ControladorLogin
 from negocio.controladores.controladorCadastro import ControladorCadastro
-from interface_negocio_dados.iFabricaRepositorios import IFabricaAbstrataRepositorios
-from negocio.fabricaRepositoriosMemoria import FabricaRepositoriosMemoria
-from utils.utils import Injector
+from negocio.controladores.controladorEstoque import ControladorEstoque
+from negocio.fabricas.fabricaRepositoriosMemoria import FabricaRepositoriosMemoria
 
 class Fachada(metaclass=SingletonMeta):
     
@@ -14,7 +14,6 @@ class Fachada(metaclass=SingletonMeta):
             self.__fabricaRepositorio = FabricaRepositoriosMemoria()
         else:
             pass
-
 
         repositorioClientes = self.__fabricaRepositorio.criaRepositorioClientes()
         repositorioEstoque = self.__fabricaRepositorio.criaRepositorioEstoque()
@@ -28,6 +27,7 @@ class Fachada(metaclass=SingletonMeta):
         
         self.__controladorLogin = ControladorLogin()
         self.__controladorCadastro = ControladorCadastro()
+        self.__controladorEstoque = ControladorEstoque()
 
     def fazLogin(self, email: str, senha: str) -> Response:
         try:
@@ -47,4 +47,18 @@ class Fachada(metaclass=SingletonMeta):
             return response
         except:
             return Response(status=400)
-            
+    
+    def verificaDisponibilidade(self, produtoid: int, qtdInteresse: int):
+        # mudar na arquitetura de adicionarAoCarrinho para verificarDisponibilidade
+        try:
+            item = self.__controladorEstoque.verificaDisponibilidade(produtoid, qtdInteresse)
+            response = jsonify(item.__dict__)
+            response.status_code = 200
+            return response
+        except EstoqueInsuficienteException as err:
+            return Response(err.message, status=400)
+    
+    def listaItens(self):
+        itens = self.__controladorEstoque.pegaEstoque()
+        itens_dicts = [item.__dict__ for item in itens]
+        return jsonify(itens_dicts)

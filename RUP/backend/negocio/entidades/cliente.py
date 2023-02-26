@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class Cliente:
-    def __init__(self, email, senha, id=-1):
-        self.email = email
-        self.senha = senha
-        self.id = id
+    email: str
+    cpf: str
+    senha: str
+    id: int

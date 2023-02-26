@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from negocio.entidades.item import Item
+from typing import List
+
 class IRepositorioEstoque():
     
     @abstractmethod
@@ -7,13 +9,17 @@ class IRepositorioEstoque():
         pass
     
     @abstractmethod
-    def buscarItem(self, email: str) -> Item:
+    def buscarItem(self, produtoid: int) -> Item:
         pass
     
     @abstractmethod
-    def removerItem(self, email: str) -> Item:
+    def removerItem(self, produtoid: int) -> Item:
         pass
     
     @abstractmethod
-    def atualizarItem(self, email: str) -> Item :
+    def atualizarItem(self, produtoid: int, qtd: int) -> Item :
+        pass
+
+    @abstractmethod
+    def getAll(self) -> List[Item]:
         pass

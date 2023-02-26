@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from negocio.entidades.produto import Produto
 
-@dataclass
+@dataclass(frozen=True)
 class Item:
-    def __init__(self, produto: Produto, qtd: int):
-        self.produto=produto
-        self.qtd=qtd
+    produto: Produto
+    qtd: int

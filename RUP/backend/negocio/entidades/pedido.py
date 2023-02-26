@@ -1,9 +1,12 @@
+from typing import List
 from dataclasses import dataclass
+from negocio.entidades.item import Item
+from utils.utils import StatusPedido
 
-@dataclass
+@dataclass(frozen=True)
 class Pedido:
-    def __init__(self,id, cliente, itens, status):
-        self.id = id
-        self.cliente = cliente
-        self.itens = itens
-        self.status = status
+    id: int
+    clienteId: int
+    valor: float
+    itens: List[Item]
+    status: StatusPedido
