@@ -1,22 +1,22 @@
 from negocio.entidades.cliente import Cliente
 from interface_negocio_dados.iRepositorioCliente import IRepositorioClientes
 from utils.utils import SingletonMeta
-
-clientes = [Cliente('a', 'b')]
+from dados.cliente.clientes_db import clientesDB
 
 class RepositorioClienteMemoria(IRepositorioClientes, metaclass=SingletonMeta):
 
     def __init__(self):
         pass
     
-    def inserirCliente(self, cliente: Cliente) -> Cliente:
-        cliente.id = id_count
-        id_count += 1
-        clientes.append(cliente)
-        return cliente
+    def inserirCliente(self, email: str, senha: str, cpf: str) -> Cliente:
+        id = clientesDB.id_count
+        clientesDB.id_count += 1
+        clienteNovo = Cliente(email, senha, cpf, id)
+        clientesDB.clientesappend(clienteNovo)
+        return clienteNovo
     
     def buscarCliente(self, email: str) -> Cliente:
-        cliente = next(iter([c for c in clientes if c.email == email]))
+        cliente = next(iter([c for c in clientesDB.clientes if c.email == email]))
         if cliente == None:
             raise Exception("Cliente nao encontrado")
 
@@ -24,7 +24,7 @@ class RepositorioClienteMemoria(IRepositorioClientes, metaclass=SingletonMeta):
 
     def removerCliente(self, email: str) -> Cliente:
         cliente = self.buscarCliente(email)
-        clientes.pop(cliente)
+        clientesDB.pop(cliente)
         return cliente
         
 
@@ -34,5 +34,4 @@ class RepositorioClienteMemoria(IRepositorioClientes, metaclass=SingletonMeta):
         return cliente
 
     def getAll(self):
-        print(clientes)
-        return clientes
+        return clientesDB.clientes
