@@ -19,8 +19,6 @@ class Fachada(metaclass=SingletonMeta):
         repositorioEstoque = self.__fabricaRepositorio.criaRepositorioEstoque()
         repositorioPedidos = self.__fabricaRepositorio.criaRepositorioPedido()
         
-        self.repo = repositorioPedidos
-
         myContainer = Injector()
         myContainer.repositorioClientes = repositorioClientes
         myContainer.repositorioEstoque = repositorioEstoque
@@ -34,7 +32,8 @@ class Fachada(metaclass=SingletonMeta):
     def fazLogin(self, email: str, senha: str) -> Response:
         try:
             cliente = self.__controladorLogin.loginCliente(email, senha)
-            response = jsonify(cliente.__dict__)
+            token = "logged"
+            response = jsonify({'cliente': cliente.__dict__, 'token': token})
             response.status_code = 200
             return response
         except Exception as err:
@@ -47,7 +46,8 @@ class Fachada(metaclass=SingletonMeta):
             response = jsonify(cliente.__dict__)
             response.status_code = 200
             return response
-        except:
+        except Exception as err:
+            print(err)
             return Response(status=400)
     
     def verificaDisponibilidade(self, produtoid: int, qtdInteresse: int):

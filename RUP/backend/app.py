@@ -1,7 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from negocio import Fachada
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 
 fachada = Fachada()
 
@@ -9,10 +12,22 @@ fachada = Fachada()
 def hello_world():
     return fachada.pegaalgo()
 
-@app.route('/login/<email>/<senha>')
-def login(email, senha):
+@app.post('/login')
+def login():
+    data = request.json
+    email = data['email']
+    senha = data['senha']
     res = fachada.fazLogin(email, senha)
     return res
+
+@app.post('/cadastro')
+def cadastro():
+    data = request.json
+    email = data['email']
+    senha = data['senha']
+    cpf = data['cpf']
+    return fachada.fazCadastro(email, senha, cpf)
+
 
 @app.route('/produtos/<int:produtoid>/<int:qtd>')
 def verificaDisponibilidade(produtoid, qtd):

@@ -15,6 +15,6 @@ class RegistroClientes:
         self.cliente = cliente
         return cliente
 
-    def fazCadastro(self, cliente: Cliente) -> Cliente:
-        cliente = self.repositorioCliente.inserirCliente(cliente)
+    def fazCadastro(self, email, senha, cpf) -> Cliente:
+        cliente = self.repositorioCliente.inserirCliente(email, senha, cpf)
         return cliente

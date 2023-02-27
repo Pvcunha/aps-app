@@ -12,7 +12,7 @@ class RepositorioClienteMemoria(IRepositorioClientes, metaclass=SingletonMeta):
         id = clientesDB.id_count
         clientesDB.id_count += 1
         clienteNovo = Cliente(email, senha, cpf, id)
-        clientesDB.clientesappend(clienteNovo)
+        clientesDB.clientes.append(clienteNovo)
         return clienteNovo
     
     def buscarCliente(self, email: str) -> Cliente:

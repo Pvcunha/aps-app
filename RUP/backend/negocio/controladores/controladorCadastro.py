@@ -9,6 +9,5 @@ class ControladorCadastro:
         self.registroClientes = RegistroClientes(injector.repositorioClientes)
     
     def cadastroCliente(self, email, senha, cpf)-> Cliente:
-        clienteNovo = Cliente(email, senha, cpf)
-        self.registroClientes.fazCadastro(clienteNovo)
+        clienteNovo = self.registroClientes.fazCadastro(email, senha, cpf)
         return clienteNovo
