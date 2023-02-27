@@ -1,6 +1,7 @@
 from dados.cliente.repositorioClienteMemoria import RepositorioClienteMemoria
 from negocio.entidades.cliente import Cliente
 from interface_negocio_dados.iRepositorioCliente import IRepositorioClientes
+
 class RegistroClientes:
 
     def __init__(self, repositorioClientes: IRepositorioClientes):

@@ -66,6 +66,9 @@ class Fachada(metaclass=SingletonMeta):
         return jsonify(itens_dicts)
 
     def fazerPedido(self, pedido, dadosPagamento):
-        pedidoFeito = self.__controladorPedido(pedido, dadosPagamento)
-        response = jsonify(pedidoFeito)
+        try:
+            pedidoFeito = self.__controladorPedido.fazerPedido(pedido, dadosPagamento)
+            response = jsonify(pedidoFeito)
+        except:
+            response = Response(404)
         return response

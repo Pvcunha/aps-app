@@ -1,10 +1,9 @@
 from flask import Flask, jsonify, request
 from negocio import Fachada
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
-
 
 fachada = Fachada()
 
@@ -28,12 +27,18 @@ def cadastro():
     cpf = data['cpf']
     return fachada.fazCadastro(email, senha, cpf)
 
+@app.post('/finalizarPedido')
+def finalizarPedido():
+    pedido = request.json['pedido']
+    dadosDePagamento = request.json['dadosDoPagamento']
+    return fachada.fazerPedido(pedido, dadosDePagamento)
 
-@app.route('/produtos/<int:produtoid>/<int:qtd>')
+
+@app.route('/produtos/disponibilidade')
 def verificaDisponibilidade(produtoid, qtd):
     return fachada.verificaDisponibilidade(produtoid, qtd)
 
-@app.route('/produtos')
+@app.get('/produtos')
 def listaProdutos():
     return fachada.listaItens()
 
