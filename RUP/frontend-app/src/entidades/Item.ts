@@ -1,6 +1,6 @@
 import { Produto } from "./Produto";
 
-export type Item = {
-    produto:Produto;
-    quantidade:number;
+export interface Item {
+    produto: Produto,
+    qtd: number
 }

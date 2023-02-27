@@ -2,7 +2,7 @@ import { Produto } from "../entidades/Produto";
 import { getRequest } from "./default";
 
 
-type PegaProdutoResponse ={
+type PegaProdutoResponse = {
     produto:Produto;
 }
 

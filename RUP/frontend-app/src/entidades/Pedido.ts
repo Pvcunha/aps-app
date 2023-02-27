@@ -1,6 +1,6 @@
 import { Item } from "./Item";
 
-export type Pedido ={
+export interface Pedido {
     id:number;
     clienteId:number;
     valor:number;

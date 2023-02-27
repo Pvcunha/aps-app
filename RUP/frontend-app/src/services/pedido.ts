@@ -6,8 +6,6 @@ export const PegarPedido = async (id:number): Promise<Pedido> => {
     const response = await getRequest(`/pedidos/${id}`, token?.toString());
     return response;
 }
-
-
 // N coloquei a de pegar todos os pedidos 
 
 export const realizarPedido = async (

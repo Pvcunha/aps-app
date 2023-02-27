@@ -1,5 +1,5 @@
-export type Produto = {
-    nome:string;
-    valor:number;
-    id:number;
+export interface Produto {
+    id: number,
+    nome: string,
+    valor: number
 }
