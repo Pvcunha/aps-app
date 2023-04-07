@@ -1,0 +1,1 @@
+from model.negocio.usuario.usuario import Usuario
