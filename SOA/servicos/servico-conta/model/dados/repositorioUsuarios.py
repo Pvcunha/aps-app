@@ -31,8 +31,14 @@ class RepositorioUsuarioMemoria(RepositorioUsuariosInterface):
         self.idCount -= 1
         return usuario
 
-    def buscaUsuario(self, email: str):
-        usuario = next([usuario for usuario in self.usuariosCadastrados if usuario.email == email])
+    def buscaUsuario(self, email: str) -> Usuario:
+        usuario = None
+        for u in self.usuariosCadastrados:
+            if u.email == email:
+                usuario = u
+        
+        if usuario == None:
+            raise Exception('Usuario nao encontrado')
         return usuario
     
     def pegaTodos(self):

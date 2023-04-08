@@ -8,3 +8,11 @@ class CadastroUsuarios:
 
     def cadastraUsuario(self, usuario: Usuario) -> Usuario:
         return self.repositorioUsuarios.adicionaUsuario(usuario)
+    
+    def validaLogin(self, usuario: Usuario) -> Usuario:
+        # TODO adicionar exception de senha incorreta
+        usuarioBanco: Usuario = self.repositorioUsuarios.buscaUsuario(usuario.email) 
+        if usuarioBanco.email == usuario.email and usuarioBanco.senha == usuario.senha:
+            return usuarioBanco
+        else: 
+            raise Exception('Senha incorreta')

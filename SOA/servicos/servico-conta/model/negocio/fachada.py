@@ -17,7 +17,9 @@ class Fachada(metaclass=Singleton):
     def cadastraUsuario(self, usuario: Usuario) -> Usuario:
         return self.controladorUsuario.cadastraUsuario(usuario)
 
-    def login(self, usuario: Usuario):
-        pass
+    def validaLogin(self, usuario: Usuario):
+        return self.controladorUsuario.validaLogin(usuario)
 
+    def validaSessao(self, token):
+        return self.controladorUsuario.validaSessao(token)
 pass
