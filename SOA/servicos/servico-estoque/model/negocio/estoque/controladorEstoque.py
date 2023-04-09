@@ -1,6 +1,7 @@
-from model.negocio.Estoque.cadastroEstoque import CadastroEstoque
+from model.negocio.estoque.cadastroEstoque import CadastroEstoque
 from model.dados.iRepositorioEstoque import RepositorioEstoqueInterface
-from flask import session
+from model.negocio.estoque.item import Item
+from typing import List
 
 class ControladorEstoque:
 
@@ -9,10 +10,10 @@ class ControladorEstoque:
         self.sessoes = {}
         pass
 
-    def verificaDisponibilidade(self, id : int) -> bool:
+    def verificaDisponibilidade(self, item : Item) -> bool:
         return self.cadastroEstoque.verificaDisponibilidade(id)
 
-    def listaItens(self) -> dict[str,str]:
+    def listaItens(self) -> List[Item]:
         return self.cadastroEstoque.listaItens()
        
     

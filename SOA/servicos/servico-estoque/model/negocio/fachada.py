@@ -1,8 +1,9 @@
-from model.negocio.Estoque.item import Item
-from model.negocio.Estoque.controladorEstoque import ControladorEstoque
+from model.negocio.estoque.item import Item
+from model.negocio.estoque.controladorEstoque import ControladorEstoque
 from model.dados.iRepositorioEstoque import RepositorioEstoqueInterface
 from model.negocio.fabricaRepositoriosMemoria import FabricaRepositoriosMemoria
 from utils.util import Singleton
+from typing import List
 
 class Fachada(metaclass=Singleton):
 
@@ -14,8 +15,8 @@ class Fachada(metaclass=Singleton):
         
         self.controladorEstoque: ControladorEstoque = ControladorEstoque(repositorioEstoque)
 
-    def verificaDisponibilidade(self, produtoId: int, qtdInteresse: int)->bool:
-        return self.controladorEstoque.verificaDisponibilidade(produtoId,qtdInteresse)
+    def verificaDisponibilidade(self, item : Item)->bool:
+        return self.controladorEstoque.verificaDisponibilidade(item)
 
     def listaItens(self)->List[Item]:
         return self.controladorEstoque.listaItens()

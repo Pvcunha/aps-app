@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from negocio.Estoque.produto import Produto
+from model.negocio.estoque.produto import Produto
 
 @dataclass(frozen=True)
 class Item:
