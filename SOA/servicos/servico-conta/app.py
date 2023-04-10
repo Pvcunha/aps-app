@@ -22,7 +22,7 @@ def criaApp():
         data = request.json
         return loginController.validaLogin(data)
     
-    @app.route('/valida-sessao', methods=['POST'])
+    @app.route('/validaSessao', methods=['POST'])
     def me():
         data = request.json
         return loginController.validaSessao(data)
@@ -30,4 +30,18 @@ def criaApp():
     return app
 
 if __name__ == '__main__':
+    import consul
+    client = consul.Consul(host='discovery', port=8500)
+    
+    service_name = 'servico-conta'
+    service_port = 3000
+
+    client.agent.service.register(
+        
+        name=service_name,
+        service_id=service_name,
+        port=service_port,
+        check=consul.Check.http(f'http://servico-conta:{service_port}', interval='10s')    
+    )
+
     criaApp().run(debug=True, host="0.0.0.0", port=3000)
