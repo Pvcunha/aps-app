@@ -1,6 +1,5 @@
 from .pedido import Pedido
 from model.dados.iRepositorioPedidosInterface import RepositorioPedidosInterface
-from ..produto import Produto
 from .cadastroPedido import CadastroPedido
 
 import functools
@@ -34,6 +33,6 @@ class ControladorPedido:
         #TODO fazer comunicacao com cliente de estoque
         pass
 
-    def verificaDisponibilidade(self, produto: Produto):
+    def verificaDisponibilidade(self, produto):
         # TODO fazer comunicacao com cliente de estoque
         return True

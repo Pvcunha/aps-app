@@ -23,6 +23,7 @@ class ControllerLogin:
         return response
     
     def validaSessao(self, data) -> Response:
+        print(data)
         token = {'email': data['email'], 'id': data['id'], 'tipo': data['tipo']} 
 
         try:

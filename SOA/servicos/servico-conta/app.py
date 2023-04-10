@@ -22,7 +22,7 @@ def criaApp():
         data = request.json
         return loginController.validaLogin(data)
     
-    @app.route('/valida-sessao', methods=['POST'])
+    @app.route('/validaSessao', methods=['POST'])
     def me():
         data = request.json
         return loginController.validaSessao(data)

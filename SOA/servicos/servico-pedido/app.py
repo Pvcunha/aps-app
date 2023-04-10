@@ -1,5 +1,6 @@
 from flask import Flask, request
 from controllers.controllerPedido import ControllerPedido
+from middlewares.auth import MiddlewareAuth
 
 def criaApp():
     app = Flask(__name__)

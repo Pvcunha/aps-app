@@ -1,5 +1,6 @@
 from model.negocio.fachada import Fachada
 from model.negocio.pedido.pedido import Pedido
+from middlewares.auth import MiddlewareAuth
 from flask import jsonify, Response
 import traceback
 
@@ -9,9 +10,11 @@ class ControllerPedido:
         self.fachada: Fachada = Fachada()
     
     def criaPedido(self, data) -> Response:
-        #TODO inserir auth
+        
+        if not MiddlewareAuth.autentica(data):
+            return jsonify({'erro': 'Requer Autenticacao'}), 401
 
-        pedido = Pedido(id="xxx", clienteID=data['clienteID'], precoTotal=0.0, produtos=data['produtos'], status='esperando pagamento')
+        pedido = Pedido(id="xxx", clienteID=data['usuarioID'], precoTotal=0.0, produtos=data['produtos'], status='esperando pagamento')
         print(pedido.produtos)
         try:
             pedido = self.fachada.criaPedido(pedido)
@@ -23,6 +26,7 @@ class ControllerPedido:
         return response
     
     def cancelaPedido(self, data) -> Response:
+     
         pedidoID = data['pedidoID']
         try:
             pedidoCancelado = self.fachada.cancelaPedido(pedidoID)
@@ -34,6 +38,7 @@ class ControllerPedido:
         return response 
     
     def confirmaPedido(self, data) -> Response:
+        
         pedidoID = data['pedidoID']
         try:
             pedidoConfirmado = self.fachada.confirmaPedido(pedidoID)
