@@ -18,19 +18,17 @@ def criaApp():
         qtd = data['qtd']
         return estoqueController.verificaDisponibilidade(id,qtd)
 
-    @app.post('/atualizaMenosItem')
+    @app.post('/atualizaMenosPedido')
     def menos():
         data = request.json
-        id = data['id']
-        qtd = data['qtd']
-        return estoqueController.atualizaMenos(id,qtd)
+        itens = data['pedido']
+        return estoqueController.atualizaMenos(itens)
 
-    @app.post('/atualizaMaisItem')
+    @app.post('/atualizaMaisPedido')
     def mais():
         data = request.json
-        id = data['id']
-        qtd = data['qtd']
-        return estoqueController.atualizaMais(id,qtd)
+        itens = data['pedido']
+        return estoqueController.atualizaMais(itens)
 
     @app.route('/listaItens')
     def itens():

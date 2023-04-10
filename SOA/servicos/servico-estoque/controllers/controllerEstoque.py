@@ -1,3 +1,4 @@
+from typing import List
 from unicodedata import name
 from model.negocio.fachada import Fachada
 from model.negocio.estoque.item import Item
@@ -30,25 +31,35 @@ class ControllerEstoque:
         itens_dicts = [item.__dict__ for item in itens]
         return jsonify(itens_dicts)
 
-    def atualizaMenos(self, produtoId: int, qtd: int):
+    def atualizaMenos(self, itens:List[Item]):
         # mudar na arquitetura de adicionarAoCarrinho para verificarDisponibilidade
         try:
-            novoProduto = Produto(id = produtoId, nome = "",valor = 0)
-            novoItem = Item(produto=novoProduto,qtd= qtd)
-            item = self.fachada.atualizaMenos(novoItem)
-            response = jsonify(item.__dict__)
+            listItens = []
+            for novoItem in itens:
+                novoProd = Produto(nome = novoItem["produto"]["nome"],valor = novoItem["produto"]["valor"],id = novoItem["produto"]["id"])
+                itemProv  = Item(produto = novoProd,qtd =novoItem["qtd"])
+                item = self.fachada.atualizaMenos(itemProv)
+                listItens.append(item)
+
+            response = jsonify([item.__dict__ for item in listItens])
             response.status_code = 200
             return response
         except EstoqueInsuficienteException as err:
             return Response(err.message, status=400)
 
-    def atualizaMais(self, produtoId: int, qtd: int):
+    def atualizaMais(self, itens:List[Item]):
         # mudar na arquitetura de adicionarAoCarrinho para verificarDisponibilidade
+       
         try:
-            novoProduto = Produto(id = produtoId, nome = "",valor = 0)
-            novoItem = Item(produto=novoProduto,qtd= qtd)
-            item = self.fachada.atualizaMais(novoItem)
-            response = jsonify(item.__dict__)
+            
+            listItens = []
+            for novoItem in itens:
+                novoProd = Produto(nome = novoItem["produto"]["nome"],valor = novoItem["produto"]["valor"],id = novoItem["produto"]["id"])
+                itemProv  = Item(produto = novoProd,qtd =novoItem["qtd"])
+                item = self.fachada.atualizaMais(itemProv)
+                listItens.append(item)
+
+            response = jsonify([item.__dict__ for item in listItens])
             response.status_code = 200
             return response
         except EstoqueInsuficienteException as err:
