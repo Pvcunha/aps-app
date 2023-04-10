@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from model.negocio.estoque.produto import Produto
 
-@dataclass(frozen=True)
+@dataclass
 class Item:
     produto: Produto
     qtd: int

@@ -7,13 +7,28 @@ class CadastroEstoque:
         self.repositorioEstoque = repositorioEstoque
     pass
 
-    def verificaDisponibilidade(self, item: Item) -> bool:
-        item : Item = self.repositorioEstoque.buscarItem(Item)
+    def verificaDisponibilidade(self, item: Item) -> Item:
+        item : Item = self.repositorioEstoque.buscarItem(item)
 
         if item is not None:
-            return True
-        return False
+            return item
+        return None
 
     def listaItens(self) -> List[Item]:
-        lista: list[Item] = self.repositorioEstoque.getaAll()
+        lista: list[Item] = self.repositorioEstoque.getAll()
         return lista
+
+    def atualizaMenos(self, item: Item) -> Item:
+        item : Item = self.repositorioEstoque.atualizarMenosItem(item)
+
+        if item is not None:
+            return item
+        return None
+
+    def atualizaMais(self, item: Item) -> Item:
+        item : Item = self.repositorioEstoque.atualizarMaisItem(item)
+
+        if item is not None:
+            return item
+        return None
+

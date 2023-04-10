@@ -15,9 +15,15 @@ class Fachada(metaclass=Singleton):
         
         self.controladorEstoque: ControladorEstoque = ControladorEstoque(repositorioEstoque)
 
-    def verificaDisponibilidade(self, item : Item)->bool:
+    def verificaDisponibilidade(self, item : Item)->Item:
         return self.controladorEstoque.verificaDisponibilidade(item)
 
     def listaItens(self)->List[Item]:
         return self.controladorEstoque.listaItens()
+
+    def atualizaMenos(self, item : Item)->Item:
+        return self.controladorEstoque.atualizaMenos(item)
+
+    def atualizaMais(self, item : Item)->Item:
+        return self.controladorEstoque.atualizaMais(item)
 pass

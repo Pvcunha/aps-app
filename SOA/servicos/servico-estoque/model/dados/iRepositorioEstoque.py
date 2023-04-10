@@ -9,7 +9,7 @@ class RepositorioEstoqueInterface:
         pass
     
     @abstractmethod
-    def buscarItem(self, produtoid: int) -> Item:
+    def buscarItem(self, itemArg: Item) -> Item:
         pass
     
     @abstractmethod
@@ -19,7 +19,12 @@ class RepositorioEstoqueInterface:
     @abstractmethod
     def atualizarItem(self, produtoid: int, qtd: int) -> Item :
         pass
-
+    @abstractmethod
+    def atualizarMenosItem(self, itemArg:Item) -> Item:
+        pass
+    @abstractmethod
+    def atualizarMaisItem(self, itemArg:Item) -> Item:
+        pass
     @abstractmethod
     def getAll(self) -> List[Item]:
         pass

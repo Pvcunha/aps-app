@@ -14,9 +14,25 @@ def criaApp():
     @app.post('/verificaDisponibilidade')
     def verifica():
         data = request.json
-        return estoqueController.verificaDisponibilidade(Item)
+        id = data['id']
+        qtd = data['qtd']
+        return estoqueController.verificaDisponibilidade(id,qtd)
 
-    @app.route('/listaItens', methods=["POST"])
+    @app.post('/atualizaMenosItem')
+    def menos():
+        data = request.json
+        id = data['id']
+        qtd = data['qtd']
+        return estoqueController.atualizaMenos(id,qtd)
+
+    @app.post('/atualizaMaisItem')
+    def mais():
+        data = request.json
+        id = data['id']
+        qtd = data['qtd']
+        return estoqueController.atualizaMais(id,qtd)
+
+    @app.route('/listaItens')
     def itens():
         data = request.json
         return estoqueController.listaItens()
