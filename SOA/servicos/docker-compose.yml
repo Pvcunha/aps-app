@@ -1,0 +1,41 @@
+version: '3'
+services:
+  servico-conta:
+    build: 
+      context: ./servico-conta
+    ports:
+      - "3000:3000"
+    environment:
+      - FLASK-APP=/root/servico-conta
+      - FLASK_RUN_PORT=3000
+    command: python3 app.py
+    depends_on:
+      - discovery
+    networks:
+      - mynet
+  servico-pedido:
+    build:
+      context: ./servico-pedido
+    ports:
+      - "3001:3001"
+    command: python3 app.py
+    depends_on:
+      - discovery
+    networks:
+      - mynet
+  discovery:
+    image: consul:latest
+    command: "agent"
+    ports:
+      - "3333:8500"
+      - "8600:53/tcp"
+      - "8600:53/udp"
+    volumes:
+      - ./discovery-service/server.json:/consul/config/server.json:ro
+    networks:
+      - mynet
+    restart: always
+
+networks:
+  mynet:
+    driver: bridge
