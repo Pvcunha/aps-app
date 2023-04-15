@@ -31,10 +31,10 @@ class ControladorPedido:
         return self.cadastroPedidos.criaPedido(pedidoParaConfirmar)
     
     def __repoeEstoque(self, produtos: List[Dict[str, Union[str, int]]]):
-        return FronteiraEstoque.alterarEstoque(produtos=produtos, rota='/repoeEstoque')
+        return FronteiraEstoque.alterarEstoque(produtos=produtos, rota='/atualizaMaisPedido')
     
     def __removeEstoque(self, produtos: List[Dict[str, Union[str, int]]]):
-        return FronteiraEstoque.alterarEstoque(produtos=produtos, rota='/removeItens')
+        return FronteiraEstoque.alterarEstoque(produtos=produtos, rota='/atualizaMenosPedido')
 
     def __verificaDisponibilidade(self, produto):
         return FronteiraEstoque.verificaDisponibilidade(produto)
