@@ -45,6 +45,24 @@ services:
       - servico-fachada
     networks:
       - mynet
+
+  servico-estoque:
+    build: 
+      context: ./servico-estoque
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - FLASK-APP=/root/servico-estoque
+      - FLASK_RUN_PORT=3000
+    command: python3 app.py
+    volumes:
+      - ./servico-estoque:/root/servico-estoque
+    depends_on:
+      - discovery
+      - servico-fachada
+    networks:
+      - mynet
   
   discovery:
     image: consul:latest
