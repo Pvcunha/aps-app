@@ -1,6 +1,6 @@
 FROM python:3.10-slim-buster
 
-COPY . /root/servico-conta
+COPY ./requirements.txt /root/servico-conta/requirements.txt
 
 WORKDIR /root/servico-conta
 
