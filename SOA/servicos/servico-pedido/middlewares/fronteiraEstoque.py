@@ -8,7 +8,7 @@ class FronteiraEstoque:
     def alterarEstoque(cls, produtos: List[Dict[str, Union[str, int]]], rota: str):
         data = {"produtos": produtos}
         try:
-            response = comunicar(f'http://localhost:3333/estoque/{rota}', data=data,
+            response = comunicar(f'http://servico-fachada:3333/estoque/{rota}', data=data,
                                  method='POST', headers={'Content-Type': 'application/json'})
             if response.status_code == 200:
                 return True
@@ -19,9 +19,9 @@ class FronteiraEstoque:
     
     @classmethod
     def verificaDisponibilidade(cls, produto: List[Dict[str, Union[str, int]]]):
-        data = {"produto": produto}
+        data = {"id": produto['id'], 'qtd': produto['qtd']}
         try:
-            response = comunicar('http://localhost:3333/estoque/verificaDisponibilidade', data=data,
+            response = comunicar('http://servico-fachada:3333/estoque/verificaDisponibilidade', data=data,
                                  method='POST', headers={'Content-Type': 'application/json'})
             if response.status_code == 200:
                 return True

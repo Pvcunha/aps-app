@@ -17,7 +17,7 @@ class ControladorPedido:
             if not ok:
                 raise Exception('Produto nao disponivel')
             
-        pedido.precoTotal = functools.reduce(lambda x, y: x + y['preco'], pedido.produtos, 0.0)
+        pedido.precoTotal = functools.reduce(lambda x, y: x + y['valor']*y['qtd'], pedido.produtos, 0.0)
         return self.cadastroPedidos.criaPedido(pedido)
 
     def cancelaPedido(self, pedidoID) -> Pedido:

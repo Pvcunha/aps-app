@@ -36,8 +36,8 @@ class ControllerEstoque:
         try:
             listItens = []
             for novoItem in itens:
-                novoProd = Produto(nome = novoItem["produto"]["nome"],valor = novoItem["produto"]["valor"],id = novoItem["produto"]["id"])
-                itemProv  = Item(produto = novoProd,qtd =novoItem["qtd"])
+                novoProd = Produto(nome = novoItem["produtos"]["nome"],valor = novoItem["produtos"]["valor"],id = novoItem["produtos"]["id"])
+                itemProv  = Item(produto = novoProd,qtd =novoItem["produtos"]["qtd"])
                 item = self.fachada.atualizaMenos(itemProv)
                 listItens.append(item)
 
@@ -54,8 +54,8 @@ class ControllerEstoque:
             
             listItens = []
             for novoItem in itens:
-                novoProd = Produto(nome = novoItem["produto"]["nome"],valor = novoItem["produto"]["valor"],id = novoItem["produto"]["id"])
-                itemProv  = Item(produto = novoProd,qtd =novoItem["qtd"])
+                novoProd = Produto(nome = novoItem["produtos"]["nome"],valor = novoItem["produtos"]["valor"],id = novoItem["produtos"]["id"])
+                itemProv  = Item(produto = novoProd,qtd =novoItem["produtos"]["qtd"])
                 item = self.fachada.atualizaMais(itemProv)
                 listItens.append(item)
 
