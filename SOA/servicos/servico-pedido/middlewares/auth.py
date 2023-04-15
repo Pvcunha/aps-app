@@ -5,7 +5,6 @@ class MiddlewareAuth:
 
     @classmethod
     def autentica(cls, data) -> bool:
-        print(data)
         dadoAutentica = {'id': data['usuarioID'], 'email': data['usuarioEmail'], 'tipo': data['usuarioTipo']}
         try:
             response = comunicar('http://servico-fachada:3333/conta/validaSessao', 

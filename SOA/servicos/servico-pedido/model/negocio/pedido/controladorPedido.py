@@ -1,6 +1,7 @@
 from .pedido import Pedido
 from model.dados.iRepositorioPedidosInterface import RepositorioPedidosInterface
 from .cadastroPedido import CadastroPedido
+from middlewares.fronteiraEstoque import FronteiraEstoque
 
 import functools
 from typing import List, Dict, Union
@@ -12,7 +13,7 @@ class ControladorPedido:
     
     def criaPedido(self, pedido: Pedido) -> Pedido:
         for produto in pedido.produtos:
-            ok = self.verificaDisponibilidade(produto)
+            ok = self.__verificaDisponibilidade(produto)
             if not ok:
                 raise Exception('Produto nao disponivel')
             
@@ -30,9 +31,10 @@ class ControladorPedido:
         return self.cadastroPedidos.criaPedido(pedidoParaConfirmar)
     
     def __repoeEstoque(self, produtos: List[Dict[str, Union[str, int]]]):
-        #TODO fazer comunicacao com cliente de estoque
-        pass
+        return FronteiraEstoque.alterarEstoque(produtos=produtos, rota='/repoeEstoque')
+    
+    def __removeEstoque(self, produtos: List[Dict[str, Union[str, int]]]):
+        return FronteiraEstoque.alterarEstoque(produtos=produtos, rota='/removeItens')
 
-    def verificaDisponibilidade(self, produto):
-        # TODO fazer comunicacao com cliente de estoque
-        return True
+    def __verificaDisponibilidade(self, produto):
+        return FronteiraEstoque.verificaDisponibilidade(produto)
