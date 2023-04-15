@@ -18,6 +18,11 @@ class ControladorPedido:
                 raise Exception('Produto nao disponivel')
             
         pedido.precoTotal = functools.reduce(lambda x, y: x + y['valor']*y['qtd'], pedido.produtos, 0.0)
+        
+        ok = self.__removeEstoque(pedido.produtos)
+        if not ok:
+            raise Exception('Erro ao remover pedidos')
+        
         return self.cadastroPedidos.criaPedido(pedido)
 
     def cancelaPedido(self, pedidoID) -> Pedido:

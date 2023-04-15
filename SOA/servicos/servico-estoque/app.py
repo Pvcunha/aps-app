@@ -34,15 +34,15 @@ def criaApp():
 
     @app.post('/atualizaMenosPedido')
     def menos():
-        data = request.json
-        itens = data['pedido']
-        return estoqueController.atualizaMenos(itens)
+        print(request.json)
+        data = request.json['produtos']
+        return estoqueController.atualizaMenos(data)
 
     @app.post('/atualizaMaisPedido')
     def mais():
-        data = request.json
+        data = request.json['produtos']
         itens = data['pedido']
-        return estoqueController.atualizaMais(itens)
+        return estoqueController.atualizaMais(data)
 
     @app.route('/listaItens')
     def itens():

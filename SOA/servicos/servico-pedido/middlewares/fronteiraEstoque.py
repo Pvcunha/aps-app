@@ -6,7 +6,7 @@ class FronteiraEstoque:
 
     @classmethod
     def alterarEstoque(cls, produtos: List[Dict[str, Union[str, int]]], rota: str):
-        data = {"produtos": produtos}
+        data = {"produtos": produtos }
         try:
             response = comunicar(f'http://servico-fachada:3333/estoque/{rota}', data=data,
                                  method='POST', headers={'Content-Type': 'application/json'})
