@@ -11,6 +11,7 @@ export const getServicoConsul = (service: string) => {
       throw new Error("Service not found");
     }
 
+    console.log(service)
     const serviceInfo = services[0].Service;
 
     return `http://${serviceInfo.Address}:${serviceInfo.Port}`;

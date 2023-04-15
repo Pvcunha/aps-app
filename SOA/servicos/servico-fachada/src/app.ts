@@ -3,8 +3,8 @@ import express, { NextFunction, Request, Response } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import morgan from "morgan";
 
-import { getServicoConsul } from "../comunicacao/host";
-import servicos from "../comunicacao/servicos"
+import { getServicoConsul } from "./comunicacao/host";
+import servicos from "./comunicacao/servicos"
 
 class App {
   private server;
