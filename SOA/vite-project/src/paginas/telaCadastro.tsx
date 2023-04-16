@@ -14,10 +14,23 @@ export const TelaCadastro: React.FC = () => {
     cpf: "",
   });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    cadastro(usuario.cpf, usuario.email, usuario.senha);
-  };
+    try {
+      const response = await fetch('http://localhost:3000/conta/cadastro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usuario)
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+};
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value } = event.target;

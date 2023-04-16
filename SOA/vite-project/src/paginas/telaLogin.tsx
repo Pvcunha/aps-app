@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { login } from "../services/login"
-
+import axios from "axios";
 interface LoginFormProps  {
   email: string;
   senha: string;
@@ -11,13 +11,15 @@ export const TelaLogin: React.FC = () => {
     email: "",
     senha: "",
   });
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if( usuario.email !== "" && usuario.senha !== "") {
-        login(usuario.email, usuario.email)
-            .then(({token}) => {
-                localStorage.setItem("token", "logged");
+        axios.post('http://localhost:3000/login', {
+            email: usuario.email,
+            senha: usuario.senha
+        })
+            .then(response => {
+                localStorage.setItem("token", response.data.token);
             })
             .catch(error => {
                 console.log(error.response.data.message)
