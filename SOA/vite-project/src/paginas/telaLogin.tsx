@@ -15,9 +15,9 @@ export const TelaLogin: React.FC = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if( usuario.email !== "" && usuario.senha !== "") {
-        login(usuario.email, usuario.email)
+        login(usuario.email, usuario.senha)
             .then(({token}) => {
-                localStorage.setItem("token", "logged");
+                localStorage.setItem("token", token);
             })
             .catch(error => {
                 console.log(error.response.data.message)
