@@ -7,6 +7,9 @@ from model.negocio.adapters.adapterPagamentoCartao import AdapterPagamentoCartao
 class FabricaPagamentoCartao(FabricaPagamento):
     
     def criaPagamento(self, pedido: Pedido, dadosPagamento: Dict) -> Pagamento:
+        print("AQUI***************************")
+        print(pedido)
+        print(dadosPagamento)
         if dadosPagamento['bandeira'] == 'mockapi':
             adapterPagamentoCartao = AdapterPagamentoCartaoMockapi(pedido, numeroCartao=dadosPagamento['numeroCartao'], 
                                                                cpfTitular=dadosPagamento['cpf'], nomeTitular=dadosPagamento['nomeTitular'], 

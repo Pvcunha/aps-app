@@ -1,9 +1,10 @@
 from flask import Flask, request
-#import consul
 from controllers.controllerPagamento import ControllerPagamento
+from flask_cors import CORS
 
 def criaApp():
     app = Flask(__name__)
+    CORS(app)
     pagamentoController = ControllerPagamento()
 
     @app.route('/')
@@ -17,18 +18,6 @@ def criaApp():
 
     return app
 
-#if __name__ == '__main__':
-#    client = consul.Consul(host='discovery', port=8500)
-#    
-#    service_name = 'servico-conta'
-#    service_port = 3000
-#
-#    client.agent.service.register(
-#        
-#        name=service_name,
-#        service_id=service_name,
-#        port=service_port,
-#        check=consul.Check.http(f'http://servico-conta:{service_port}', interval='10s')    
-#    )
-#
-#    criaApp().run(debug=True, host="0.0.0.0", port=3000)
+
+if __name__ == '__main__':
+    criaApp().run(debug=True, host="0.0.0.0", port=3000)

@@ -5,7 +5,7 @@ class Fachada(metaclass=Singleton):
 
     def __init__(self, tipoBanco = 'memoria'):
 
-        self.controladorPagamento: ControladorPagamento = ControladorPagamento(repositorioPagamentos)
+        self.controladorPagamento: ControladorPagamento = ControladorPagamento()
 
     def fazPagamento(self,pedido, dadosPagamento):
         return self.controladorPagamento.fazPagamento(pedido,dadosPagamento)

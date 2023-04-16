@@ -11,7 +11,7 @@ class ControllerPagamento:
         pedido = data['pedido']
         dadosPagamento = data['dadosDoPagamento']
         try:
-            pagamentoFeito = self.fachada.fazPagamentopagamento(pedido,dadosPagamento)
+            pagamentoFeito = self.fachada.fazPagamento(pedido,dadosPagamento)
             response = jsonify(pagamentoFeito)
         except:
             response = Response(404)
