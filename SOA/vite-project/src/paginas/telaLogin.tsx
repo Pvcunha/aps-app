@@ -11,15 +11,20 @@ export const TelaLogin: React.FC = () => {
     email: "",
     senha: "",
   });
+  const handleIrAoHome = () => {
+    // Redireciona para a tela de pagamento com os dados do pedido
+    window.location.href = `/`;
+  };
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if( usuario.email !== "" && usuario.senha !== "") {
-        axios.post('http://localhost:3000/login', {
+        axios.post('http://localhost:3000/conta/login', {
             email: usuario.email,
             senha: usuario.senha
         })
             .then(response => {
                 localStorage.setItem("token", response.data.token);
+                window.location.href = "/produtos";
             })
             .catch(error => {
                 console.log(error.response.data.message)
@@ -61,7 +66,7 @@ export const TelaLogin: React.FC = () => {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '300px' }}>
           <button type="submit" style={{ width: '130px' }}>Login</button>
-          <button type="button" style={{ width: '130px' }}>Voltar</button>
+          <button onClick={handleIrAoHome} type="button" style={{ width: '130px' }}>Voltar</button>
         </div>
 
       </form>

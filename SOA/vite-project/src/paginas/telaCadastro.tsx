@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { cadastro } from "../services/cadastro"
+//import { useHistory } from 'react-router-dom'
 
 interface CadastroFormProps  {
   email: string;
@@ -8,6 +9,7 @@ interface CadastroFormProps  {
 }
 
 export const TelaCadastro: React.FC = () => {
+  //const history = useHistory();
   const [usuario, setUsuario] = useState<CadastroFormProps>({
     email: "",
     senha: "",
@@ -25,11 +27,15 @@ export const TelaCadastro: React.FC = () => {
         body: JSON.stringify(usuario)
       });
       const data = await response.json();
-      console.log(data);
+      if (response.status === 200) {
+        localStorage.setItem("token", data.token);
+        window.location.href = "/produtos"; // redireciona para a página de produtos
+      }
     } catch (error) {
       console.error(error);
     }
-};
+  };
+  
 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
