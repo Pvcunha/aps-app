@@ -1,7 +1,7 @@
 import json
 import requests
 
-class PagamentoCartaoMockapi:
+class FronteiraCartaoMockapi:
 
     @classmethod
     def pagar(cls, **args):
