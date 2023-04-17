@@ -19,12 +19,18 @@ class App {
         origin: "*"
       })
     );
-
+    
+    this.routes()
     this.server.use(morgan("dev"));
-
+    
     this.setupProxiesMiddlewares();
   }
 
+  private routes() {
+    this.server.get('/me', (req: Request, res:Response) => {
+      res.send('Ola mundo')
+    })
+  }
   private setupProxiesMiddlewares() {
     servicos.forEach( servico => {
       this.server.use(

@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { cadastro } from "../services/cadastro"
+//import { useHistory } from 'react-router-dom'
 
 interface CadastroFormProps  {
   email: string;
@@ -8,16 +9,27 @@ interface CadastroFormProps  {
 }
 
 export const TelaCadastro: React.FC = () => {
+  //const history = useHistory();
   const [usuario, setUsuario] = useState<CadastroFormProps>({
     email: "",
     senha: "",
     cpf: "",
   });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    cadastro(usuario.cpf, usuario.email, usuario.senha);
+    if(usuario.email !== "" && usuario.senha !== "" && usuario.cpf!=""){
+      cadastro(usuario.cpf,usuario.email,usuario.senha)
+          .then(({token}) => {
+              localStorage.setItem("token", token);
+          })
+          .catch(error => {
+              console.log(error.response.data.message)
+          })
+    }
   };
+  
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value } = event.target;
