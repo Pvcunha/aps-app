@@ -15,19 +15,41 @@ export const TelaLogin: React.FC = () => {
     // Redireciona para a tela de pagamento com os dados do pedido
     window.location.href = `/`;
   };
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  /*const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if( usuario.email !== "" && usuario.senha !== "") {
         login(usuario.email, usuario.senha)
-            .then(({token}) => {
+          .then(({ token, error }) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("la", token);
                 localStorage.setItem("token", token);
-            })
-            .catch(error => {
-                console.log(error.response.data.message)
-            })
+            }
+      })
+    }
+  };*/
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (usuario.email !== "" && usuario.senha !== "") {
+      try {
+        const body = {
+          "email": usuario.email,
+          "senha": usuario.senha,
+          "tipo": "cliente"
+        };
+  
+        const response = await axios.post('http://localhost:3030/conta/login', body); // substitua a URL pela sua rota de login
+  
+        console.log(response.data); // exibe o retorno da API
+        
+        localStorage.setItem("token",JSON.stringify(response.data))
+        window.location.href = `/produtos`;
+        }catch (error) {
+        console.log(error);
+      }
     }
   };
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value } = event.target;
     setUsuario((prevUsuario) => ({

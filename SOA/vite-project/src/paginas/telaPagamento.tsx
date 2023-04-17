@@ -1,6 +1,8 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { pagarPedido } from "../services/pagamento";
 import { Pedido } from "../entidades/Pedido";
+import axios from "axios";
+
 
 interface PagamentoFormProps {
   numeroCartao: string;
@@ -13,7 +15,7 @@ interface PagamentoFormProps {
 }
 
 export const TelaPagamento: React.FC = () => {
-  const [pedido, setPedido] = useState<Pedido | null>(null);
+  /*const [pedido, setPedido] = useState<Pedido | null>(null);
 
   useEffect(() => {
     // Get the order data from the URL query string
@@ -21,6 +23,10 @@ export const TelaPagamento: React.FC = () => {
     const pedidoStr = searchParams.get("pedido");
     setPedido(JSON.parse(pedidoStr));
   }, []);
+*/
+  const tok = localStorage.getItem("confirmação");
+  const decodedTo = JSON.parse(tok);
+  const { pedidoID,precoTotal } = decodedTo;
 
   const [cartao, setCartao] = useState<PagamentoFormProps>({
     numeroCartao: "",
@@ -32,9 +38,26 @@ export const TelaPagamento: React.FC = () => {
     valorPagamento: 0,
   });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    pagarPedido(pedido!, cartao);
+    const requestBody = {
+      "pedido": {
+        "id": pedidoID,
+        "precoTotal": precoTotal,
+      },
+      "dadosDoPagamento": {
+        "bandeira": cartao.bandeira,
+        "numeroCartao": cartao.numeroCartao,
+        "cpf": cartao.cpfTitular,
+        "nomeTitular": cartao.nomeTitular,
+        "cvv": cartao.cvvCartao,
+        "vencimento": cartao.vencimento,
+      },
+    };
+    console.log(requestBody)
+    const response = await axios.post("http://localhost:3030/pagamento/pagamento",requestBody);
+    console.log(response.data);
+    
   };
 
   const handleInputChange = (
