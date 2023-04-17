@@ -18,21 +18,14 @@ export const TelaCadastro: React.FC = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/conta/cadastro', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(usuario)
-      });
-      const data = await response.json();
-      if (response.status === 200) {
-        localStorage.setItem("token", data.token);
-        window.location.href = "/produtos"; // redireciona para a página de produtos
-      }
-    } catch (error) {
-      console.error(error);
+    if(usuario.email !== "" && usuario.senha !== "" && usuario.cpf!=""){
+      cadastro(usuario.cpf,usuario.email,usuario.senha)
+          .then(({token}) => {
+              localStorage.setItem("token", token);
+          })
+          .catch(error => {
+              console.log(error.response.data.message)
+          })
     }
   };
   

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Item } from '../entidades/Item';
 import { Produto } from '../entidades/Produto';
 import axios from 'axios';
+import { PegarProduto } from '../services/produto';
+import { Await } from 'react-router-dom';
 
 
 export const TelaProdutos : React.FC = () => {
@@ -24,13 +26,12 @@ export const TelaProdutos : React.FC = () => {
 
     useEffect(() => {
       const fetchItems = async () => {
-        const response = await axios.get<Item[]>('http://localhost:3000/produtos');
+        const response = await axios.get<Item[]>('http://localhost:3002/listaItens');
         setItens(response.data)
       };
       fetchItems();
       console.log(itens)
     }, []);
-  
     return (
       <div>
         <h1>Produtos:</h1>
