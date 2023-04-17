@@ -18,13 +18,9 @@ export const TelaLogin: React.FC = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if( usuario.email !== "" && usuario.senha !== "") {
-        axios.post('http://localhost:3000/conta/login', {
-            email: usuario.email,
-            senha: usuario.senha
-        })
-            .then(response => {
-                localStorage.setItem("token", response.data.token);
-                window.location.href = "/produtos";
+        login(usuario.email, usuario.senha)
+            .then(({token}) => {
+                localStorage.setItem("token", token);
             })
             .catch(error => {
                 console.log(error.response.data.message)
