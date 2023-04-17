@@ -14,7 +14,7 @@ class ControllerPedido:
         if not MiddlewareAuth.autentica(data):
             return jsonify({'erro': 'Requer Autenticacao'}), 401
 
-        pedido = Pedido(id="xxx", clienteID=data['usuarioID'], precoTotal=0.0, produtos=data['produtos'], status='esperando pagamento')
+        pedido = Pedido(id="xxx", clienteID=data['usuarioID'], precoTotal=0.0, produtos=data['pedido']['produtos'], status='esperando pagamento')
         print(pedido.produtos)
         try:
             pedido = self.fachada.criaPedido(pedido)

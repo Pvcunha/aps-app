@@ -33,20 +33,24 @@ def criaApp():
         data = request.json
         return controllerPedido.confirmaPedido(data)
 
+    @app.route('/saude')
+    def saude():
+        return "Confirmacao de saude"
+    
     return app
 
 if __name__ == '__main__':
     client = consul.Consul(host='discovery', port=8500)
     
-    service_name = 'servico-pedido'
-    service_port = 3001
+    servico_nome = 'servico-pedido'
+    servico_porta = 3001
 
     client.agent.service.register(
-        
-        name=service_name,
-        service_id=service_name,
-        port=service_port,
-        check=consul.Check.http(f'http://servico-pedido:{service_port}', interval='10s')    
+        name=servico_nome,
+        service_id=servico_nome,
+        address=servico_nome,
+        port=servico_porta,
+        check=consul.Check.http(f'http://servico-pedido:{servico_porta}/saude', interval='10s')    
     )
 
     criaApp().run(debug=True, host="0.0.0.0", port=3001)

@@ -11,7 +11,7 @@ class ControllerLogin:
     
     def validaLogin(self, data) -> Response:
         usuario = Usuario(id=-1, email=data['email'], senha=data['senha'], tipo=data['tipo'], cpf=None)
-        
+        print('data', data)
         try:
             usuarioLogado = self.fachada.validaLogin(usuario)
             print('usuario logado', usuarioLogado)

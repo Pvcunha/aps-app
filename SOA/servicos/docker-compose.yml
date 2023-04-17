@@ -1,5 +1,20 @@
 version: '3'
 services:
+  servico-fachada:
+    build:
+      context: ./servico-fachada/
+      dockerfile: Dockerfile
+    command: yarn dev
+    depends_on:
+      - discovery
+    ports:
+      - "3030:3333"
+    volumes:
+      - ./servico-fachada:/app
+    networks:
+      - mynet
+    restart: unless-stopped
+
   servico-conta:
     build: 
       context: ./servico-conta
@@ -9,20 +24,46 @@ services:
       - FLASK-APP=/root/servico-conta
       - FLASK_RUN_PORT=3000
     command: python3 app.py
+    volumes:
+      - ./servico-conta:/root/servico-conta
     depends_on:
       - discovery
+      - servico-fachada
     networks:
       - mynet
+  
   servico-pedido:
     build:
       context: ./servico-pedido
     ports:
       - "3001:3001"
     command: python3 app.py
+    volumes: 
+      - ./servico-pedido:/root/servico-pedido
     depends_on:
       - discovery
+      - servico-fachada
     networks:
       - mynet
+
+  servico-estoque:
+    build: 
+      context: ./servico-estoque
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - FLASK-APP=/root/servico-estoque
+      - FLASK_RUN_PORT=3000
+    command: python3 app.py
+    volumes:
+      - ./servico-estoque:/root/servico-estoque
+    depends_on:
+      - discovery
+      - servico-fachada
+    networks:
+      - mynet
+  
   discovery:
     image: consul:latest
     command: "agent"
