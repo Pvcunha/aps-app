@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { login } from "../services/login"
-
+import axios from "axios";
 interface LoginFormProps  {
   email: string;
   senha: string;
@@ -11,7 +11,10 @@ export const TelaLogin: React.FC = () => {
     email: "",
     senha: "",
   });
-
+  const handleIrAoHome = () => {
+    // Redireciona para a tela de pagamento com os dados do pedido
+    window.location.href = `/`;
+  };
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if( usuario.email !== "" && usuario.senha !== "") {
@@ -59,7 +62,7 @@ export const TelaLogin: React.FC = () => {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '300px' }}>
           <button type="submit" style={{ width: '130px' }}>Login</button>
-          <button type="button" style={{ width: '130px' }}>Voltar</button>
+          <button onClick={handleIrAoHome} type="button" style={{ width: '130px' }}>Voltar</button>
         </div>
 
       </form>

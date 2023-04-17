@@ -69,7 +69,7 @@ services:
       context: ./servico-estoque
       dockerfile: Dockerfile
     ports:
-      - "3002:3002"
+      - "3002:3002" 
     environment:
       - FLASK-APP=/root/servico-estoque
       - FLASK_RUN_PORT=3000

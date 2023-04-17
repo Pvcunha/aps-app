@@ -1,11 +1,13 @@
 from model.negocio.estoque.item import Item
 from flask import Flask, request
 from controllers.controllerEstoque import ControllerEstoque
-
+import traceback
 import consul
+from flask_cors import CORS
 
 def criaApp():
     app = Flask(__name__)
+    CORS(app)
     estoqueController = ControllerEstoque()
 
     client = consul.Consul(host='discovery', port=8500)
@@ -46,7 +48,7 @@ def criaApp():
     @app.route('/listaItens')
     def itens():
         return estoqueController.listaItens()
-    
+               
     @app.route('/saude')
     def healthCheck():
         return "ola"

@@ -22,7 +22,7 @@ class App {
     
     this.routes()
     this.server.use(morgan("dev"));
-
+    
     this.setupProxiesMiddlewares();
   }
 
