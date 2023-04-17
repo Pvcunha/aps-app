@@ -14,5 +14,6 @@ class ControllerPagamento:
             pagamentoFeito = self.fachada.fazPagamento(pedido,dadosPagamento)
             response = jsonify(pagamentoFeito)
         except:
+            traceback.print_exc()
             response = Response(404)
         return response

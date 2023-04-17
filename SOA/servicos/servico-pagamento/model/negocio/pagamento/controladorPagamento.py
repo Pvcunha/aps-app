@@ -9,6 +9,6 @@ class ControladorPagamento:
     def __init__(self):
         self.fabricaPagamentoCartao = FabricaPagamentoCartao()
 
-    def fazPagamento(self,pedido:Pedido, pagamento: Pagamento) -> Pagamento:
+    def fazPagamento(self,pedido:Pedido, pagamento) -> Pagamento:
         return self.fabricaPagamentoCartao.criaPagamento(pedido=pedido, dadosPagamento=pagamento)
         
