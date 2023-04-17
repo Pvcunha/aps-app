@@ -43,17 +43,12 @@ def criaApp():
     @app.post('/atualizaMaisPedido')
     def mais():
         data = request.json['produtos']
-        itens = data['pedido']
         return estoqueController.atualizaMais(data)
 
     @app.route('/listaItens')
     def itens():
-        try:
-            return estoqueController.listaItens()
-        except:
-            print(traceback.print_exc())
-            
-    
+        return estoqueController.listaItens()
+               
     @app.route('/saude')
     def healthCheck():
         return "ola"

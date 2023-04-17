@@ -23,12 +23,12 @@ def criaApp():
         data = request.json
         return controllerPedido.buscaPedido(data)
     
-    @app.route('/cancelaPedido', methods=['DELETE'])
+    @app.route('/cancelaPedido', methods=['POST'])
     def cancelaPedido():
         data = request.json
         return controllerPedido.cancelaPedido(data)
 
-    @app.route('/confirmaPedido', methods=['PUT'])
+    @app.route('/confirmaPedido', methods=['POST'])
     def confirmaPedido():
         data = request.json
         return controllerPedido.confirmaPedido(data)

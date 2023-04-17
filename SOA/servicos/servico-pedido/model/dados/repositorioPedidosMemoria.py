@@ -8,7 +8,6 @@ class RepositorioPedidosMemoria(RepositorioPedidosInterface):
         self.bancoPedidos = []
     
     def adicionaPedido(self, pedido: Pedido) -> Pedido:
-        pedido.id = str(uuid.uuid4())
         self.bancoPedidos.append(pedido)
         print(self.bancoPedidos)
         return pedido
