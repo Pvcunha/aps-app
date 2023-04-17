@@ -1,8 +1,9 @@
 from typing import Dict
 from model.negocio.fabricaPagamento import FabricaPagamento
-from model.negocio.pagamento.pedido import Pedido
+from model.negocio.pedido.pedido import Pedido
 from model.negocio.pagamento.pagamento import Pagamento
 from model.negocio.adapters.adapterPagamentoCartao import AdapterPagamentoCartaoMockapi
+from middlewares.fronteiraPedido import FronteiraPedido
 import traceback
 
 class FabricaPagamentoCartao(FabricaPagamento):
@@ -18,4 +19,8 @@ class FabricaPagamentoCartao(FabricaPagamento):
             raise Exception("Bandeira Nao implementada")
 
         pagamento = adapterPagamentoCartao.pagar()
+        if pagamento['concluido'] == False:
+            FronteiraPedido.cancelaPedido(pedido.id)
+        else:
+            FronteiraPedido.confirmaPedido(pedido.id)
         return pagamento

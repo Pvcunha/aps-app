@@ -1,7 +1,7 @@
 from model.negocio.pagamento.pagamentoCartao import PagamentoCartao
 from model.negocio.pagamento.pagamentoCartaoMockapi import PagamentoCartaoMockapi
 from model.negocio.pagamento.pagamento import Pagamento
-from model.negocio.pagamento.pedido import Pedido
+from ..pedido.pedido import Pedido
 
 class AdapterPagamentoCartaoMockapi(PagamentoCartao):
     def __init__(self, pedido, numeroCartao, cvv, nomeTitular, cpfTitular, vencimento):

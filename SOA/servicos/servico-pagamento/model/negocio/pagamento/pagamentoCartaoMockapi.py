@@ -1,8 +1,7 @@
 import requests
 import json
-from typing import Dict
-from typing import Any
-from model.negocio.pagamento.pedido import Pedido
+from typing import Dict, Any
+from ..pedido.pedido import Pedido
 
 class PagamentoCartaoMockapi:
 

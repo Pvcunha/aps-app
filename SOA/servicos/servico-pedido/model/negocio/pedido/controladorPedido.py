@@ -5,6 +5,7 @@ from middlewares.fronteiraEstoque import FronteiraEstoque
 
 import functools
 from typing import List, Dict, Union
+import uuid
 
 class ControladorPedido:
     
@@ -23,6 +24,8 @@ class ControladorPedido:
         if not ok:
             raise Exception('Erro ao remover pedidos')
         
+        pedido.id = str(uuid.uuid4())
+
         return self.cadastroPedidos.criaPedido(pedido)
 
     def cancelaPedido(self, pedidoID) -> Pedido:

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from model.negocio.pagamento.pedido import Pedido
+from ..pedido.pedido import Pedido
 
 class Pagamento(ABC):
 

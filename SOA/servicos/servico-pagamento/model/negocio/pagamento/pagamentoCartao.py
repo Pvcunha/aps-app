@@ -1,5 +1,5 @@
 from model.negocio.pagamento.pagamento import Pagamento
-from model.negocio.pagamento.pedido import Pedido
+from ..pedido.pedido import Pedido
 
 class PagamentoCartao(Pagamento):
     
