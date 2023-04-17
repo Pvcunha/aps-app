@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { cadastro } from "../services/cadastro"
+import axios from "axios";
 //import { useHistory } from 'react-router-dom'
 
 interface CadastroFormProps  {
@@ -15,7 +16,7 @@ export const TelaCadastro: React.FC = () => {
     senha: "",
     cpf: "",
   });
-
+/*
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(usuario.email !== "" && usuario.senha !== "" && usuario.cpf!=""){
@@ -27,8 +28,29 @@ export const TelaCadastro: React.FC = () => {
               console.log(error.response.data.message)
           })
     }
-  };
+  };*/
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (usuario.email !== "" && usuario.senha !== "" && usuario.cpf) {
+      try {
+        const body = {
+          "cpf":usuario.cpf,
+          "email": usuario.email,
+          "senha": usuario.senha,
+          "tipo": "cliente"
+        };
   
+        const response = await axios.post('http://localhost:3030/conta/cadastro', body); // substitua a URL pela sua rota de login
+  
+        console.log(response.data); // exibe o retorno da API
+        
+        localStorage.setItem("token",JSON.stringify(response.data))
+        window.location.href = `/produtos`;
+        }catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

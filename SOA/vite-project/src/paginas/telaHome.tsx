@@ -9,8 +9,8 @@ export function Home() {
     window.location.href = `/cadastro`;
   };
     return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <div style={{ background:'#f5f5dc', padding: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' ,background:'#f5f5dc'}}>
+      <div style={{ padding: '20px' }}>
         <h1 style={{ textAlign: 'center' }}>CantinaCIN</h1>
         <div style={{ textAlign: 'center' }}>
           <button onClick={handleIrAoLogin} style={{ marginRight: '20px' }}>Login</button>
